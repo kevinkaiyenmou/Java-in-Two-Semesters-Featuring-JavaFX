@@ -1,34 +1,35 @@
 
 import  java.util.Scanner;
 
-public class EasyScanner
+public class EasyScanner implements AutoCloseable
 {
+private static boolean lastReadString = false; 
+    private static Scanner keyboard = new Scanner(System.in);
     public static int nextInt()
     {
-        Scanner keyboard = new Scanner(System.in);
-        int i = keyboard.nextInt();
-        return i;
+        lastReadString = false;
+        return keyboard.nextInt();
     }
 
     public static double nextDouble()
     {
-        Scanner keyboard = new Scanner(System.in);
-        double d = keyboard.nextDouble();
-        return d;
+        lastReadString = false;
+        return keyboard.nextDouble();
     }
 
     public static String nextString()
     {
-        Scanner keyboard = new Scanner(System.in);
-        String s = keyboard.nextLine();
-        return s;
+        lastReadString = true;
+        return keyboard.next();
     }
 
     public static char nextChar()
     {
-        Scanner keyboard = new Scanner(System.in);
-        char c = keyboard.next().charAt(0);
-        return c;
+        lastReadString = false;
+        return keyboard.next().charAt(0);
+    }
+    public void close(){
+        keyboard.close();
     }
 }
 

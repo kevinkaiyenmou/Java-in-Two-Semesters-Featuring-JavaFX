@@ -1,3 +1,5 @@
+import java.util.OptionalDouble;
+
 public class BankApplication
 {
     public static void main(String[] args)
@@ -113,16 +115,21 @@ public class BankApplication
             String number = EasyScanner.nextString();
             System.out.print("Enter amount to withdraw: ");
             double amount = EasyScanner.nextDouble();
-            boolean ok = bankIn.withdrawMoney(number, amount);
+            OptionalDouble balanceAfter = bankIn.withdrawMoney(number, amount);
                         
-            if(ok)
+            if(balanceAfter.isEmpty())
             {
-                System.out.println("Withdrawal made");
+                System.out.println("No such account.");
+            }
+            else if(balanceAfter.getAsDouble() < 0)
+            {
+                System.out.printf("Insufficient funds. Account balance would be $%.2f if a withdrawal were made.", balanceAfter.getAsDouble());
             }
             else
             {
-                System.out.println("No such account or insufficient funds");
+                System.out.printf("Withdrawal made. Account balance is now $%.2f", balanceAfter.getAsDouble());
             }
+           
 
         }
 
@@ -139,7 +146,7 @@ public class BankApplication
                 {
                     System.out.println("Account number: " + account.getAccountNumber());
                     System.out.println("Account name: " +account.getAccountName());
-                    System.out.println("Balance: " + account.getBalance());
+                    System.out.printf("Balance: $%.2f\n", account.getBalance());
                     System.out.println();
   
                 }

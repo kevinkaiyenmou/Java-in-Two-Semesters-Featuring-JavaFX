@@ -1,0 +1,40 @@
+import java.util.ArrayList;
+
+public class StudentTester
+{
+    public static void main(String[] args)
+    {
+        Char choice;
+
+        Student myStudent = new student();
+        do
+        {
+            System.out.println("1. Add student")
+            System.out.println("2. Student information")
+            System.out.println("3. Average mark")
+          //System.out.println("4. Fee") ???
+            System.out.println("5. Quit")
+            System.out.print();
+            System.out.print("Enter choice [1-5]: ");
+
+            choice = EasyScanner.nextChar(); //doesn't recongnize EasyScanner, don't know why.
+            System.out.println()
+            
+            switch (choice)
+            {
+                case '1': option1(myBank);
+                break;
+                case '2': option2(myBank);
+                break;
+                case '3': option3(myBank);
+                break;
+                case '4': option4(myBank);
+                break;
+                case '5': option5(myBank);
+                break;
+                default: System.out.println("Invalid entry");
+            }
+        }
+        static void option1
+    }
+}
