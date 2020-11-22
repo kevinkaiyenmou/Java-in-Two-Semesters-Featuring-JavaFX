@@ -1,0 +1,27 @@
+{
+    "boot-java.scan-java-test-sources.on": true,
+    "project": {
+        "referencedLibraries": {
+            "include": [
+                "lib/**/*.jar",
+                "/Users/kevinmou/Downloads/javafx-sdk-16/lib/*"
+            ],
+            "exclude": [
+                "lib/sources/**"
+            ],
+            "sources": {
+                "lib/sources/.jar": "/Users/kevinmou/Downloads/javafx-sdk-16/lib/javafx-controls-16-ea+4-sources.jar"
+            }
+        },
+        "importOnFirstTimeStartup": "automatic",
+        "importHint": true,
+        "resourceFilters": [
+            "node_modules",
+            ".git"
+        ],
+        "exportJar": {
+            "targetPath": "${workspaceFolder}/${workspaceFolderBasename}.jar"
+
+        }
+    },
+}

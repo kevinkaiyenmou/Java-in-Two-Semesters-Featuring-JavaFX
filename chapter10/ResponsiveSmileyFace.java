@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
@@ -7,12 +8,12 @@ import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import javafx.beans.value.ChangeListener;
 
 public class ResponsiveSmileyFace extends Application {
-    final static int FACE_X = 125, FACE_Y = 125, FACE_RADIUS = 80, FACE_EYE_LEFT_X = 86, FACE_EYE_Y = 100, FACE_EYE_RADIUS = 10,
-    FACE_EYE_RIGHT_X = FACE_X + (FACE_X - FACE_EYE_LEFT_X), MOUTH_WIDTH = 25, radiusX = 45, radiusY = 35;
+    final static double FACE_X = 125f, FACE_Y = 125f, FACE_RADIUS = 80f, FACE_EYE_LEFT_X = 86f, FACE_EYE_Y = 100f, FACE_EYE_RADIUS = 10f,
+    FACE_EYE_RIGHT_X = FACE_X + (FACE_X - FACE_EYE_LEFT_X), MOUTH_WIDTH = 25f, radiusX = 45f, radiusY = 35f, SCENE_HEIGHT = 2f * FACE_Y + 25f, SCENE_WIDTH = 2 * FACE_X, FONT_HEIGHT = 15f, CAPTION_X = FACE_RADIUS, CAPTION_Y = FACE_RADIUS + FACE_Y + 35f;
 
     private static boolean captionSizeTooLarge(Text captionToCheck, Scene sceneToCheck, Circle faceToCheck){
         return captionToCheck.getLayoutBounds().getWidth() > sceneToCheck.getWidth() || captionToCheck.getLayoutBounds().getHeight() > sceneToCheck.getHeight() - faceToCheck.getLayoutBounds().getHeight();
@@ -41,15 +42,16 @@ public class ResponsiveSmileyFace extends Application {
         mouth.setType(ArcType.OPEN);
 
         // create and configure the text
-        final Text caption = new Text(FACE_RADIUS, FACE_RADIUS + FACE_Y + 35, "Smiley Face");
+        final Text caption = new Text( CAPTION_X, CAPTION_Y , "Smiley Face");
         caption.setFill(Color.BLUE);
-        caption.setFont(Font.font("Verdana", 15));
+        caption.setFont(Font.font("Verdana", FONT_HEIGHT));
+        caption.setTextAlignment(TextAlignment.CENTER);
 
         // create a group that holds all the features
         Group root = new Group(face, rightEye, leftEye, mouth, caption);
 
         // create and configure a new scene
-        Scene scene = new Scene(root, 2 * FACE_X, 2 * FACE_Y + 25, Color.YELLOW);
+        Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT, Color.YELLOW);
         
         // How to listen resize event of Stage in JavaFX?
         // https://stackoverflow.com/a/38216917/1757756
@@ -62,12 +64,13 @@ public class ResponsiveSmileyFace extends Application {
             //'caption' positionx, positiony, font size
             Text captionWithNewFont = new Text(FACE_RADIUS, FACE_RADIUS + FACE_Y + 35, "Smiley Face");
             
-            int newFaceRadius = face.getRadius() * newValue / oldValue; //bad operand types for binary operator '*' 
-            //I'm pretty sure * isn't a binary operator though.
-            //is only changing the radius okay?
-            Circle newFace = new Circle(FACE_X, FACE_Y, newFaceRadius); //bad operand types for binary operator '*'
-            
-            newFace.
+            double newFaceRadius = stage.getWidth() > stage.getHeight() ? stage.getHeight() * (FACE_RADIUS / SCENE_HEIGHT): stage.getWidth() * (FACE_RADIUS / SCENE_WIDTH); 
+            double newFaceX = stage.getWidth()/2;
+            double newFaceY = stage.getHeight()/2;
+            face.setRadius(newFaceRadius);
+            face.setCenterX(newFaceX);
+            face.setCenterY(newFaceY);
+
             double fontSize = caption.getFont().getSize() * (double)newValue.intValue()/(double)oldValue.intValue();
 
             for(int newAttemptValue = newValue.intValue();(newAttemptValue > 0) && (captionSizeTooLarge(captionWithNewFont,scene,face));newAttemptValue--){
@@ -102,9 +105,12 @@ public class ResponsiveSmileyFace extends Application {
             //'caption' positionx, positiony, font size
             
             Text captionWithNewFont = new Text(FACE_RADIUS, FACE_RADIUS + FACE_Y + 35, "Smiley Face");
-
-            int newFaceRadius = face.getRadius() * newValue / oldValue; //bad operand types for binary operator '*'
-            Circle  = new Circle(FACE_X, FACE_Y, newFaceRadius);
+            double newFaceRadius = stage.getWidth() > stage.getHeight() ? stage.getHeight() * (FACE_RADIUS / SCENE_HEIGHT): stage.getWidth() * (FACE_RADIUS / SCENE_WIDTH);
+            double newFaceX = stage.getWidth()/2;
+            double newFaceY = stage.getHeight()/2;
+            face.setRadius(newFaceRadius);
+            face.setCenterX(newFaceX);
+            face.setCenterY(newFaceY);
             
             double fontSize = (double)newValue.intValue() - (double)face.getLayoutBounds().getHeight();
             for(int newAttemptValue = newValue.intValue();(newAttemptValue > 0) && (captionSizeTooLarge(captionWithNewFont,scene,face));newAttemptValue--){
