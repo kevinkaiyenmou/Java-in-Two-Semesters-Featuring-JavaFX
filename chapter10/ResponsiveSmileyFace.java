@@ -13,8 +13,8 @@ import javafx.stage.Stage;
 
 public class ResponsiveSmileyFace extends Application {
     final static double FACE_X = 125f, FACE_Y = 125f, FACE_RADIUS = 80f, FACE_EYE_LEFT_X = 86f, FACE_EYE_Y = 100f, FACE_EYE_RADIUS = 10f,
-    FACE_EYE_RIGHT_X = FACE_X + (FACE_X - FACE_EYE_LEFT_X), MOUTH_WIDTH = 25f, radiusX = 45f, radiusY = 35f, SCENE_HEIGHT = 2f * FACE_Y + 25f, SCENE_WIDTH = 2 * FACE_X, FONT_HEIGHT = 15f, CAPTION_X = FACE_RADIUS, CAPTION_Y = FACE_RADIUS + FACE_Y + 35f;
-
+    FACE_EYE_RIGHT_X = FACE_X + (FACE_X - FACE_EYE_LEFT_X), MOUTH_WIDTH = 25f, radiusX = 45f, radiusY = 35f, SCENE_HEIGHT = 2f * FACE_Y + 25f, SCENE_WIDTH = 2 * FACE_X, FONT_HEIGHT = 15f, CAPTION_X = FACE_RADIUS, CAPTION_Y = FACE_RADIUS + FACE_Y + 35f, ORIG_FACE_HRATIO = (FACE_RADIUS / SCENE_HEIGHT), ORIG_FACE_WRATIO = (FACE_RADIUS / SCENE_WIDTH), ORIG_EYE_HORIZ_RATIO = (FACE_X - FACE_EYE_LEFT_X) / FACE_RADIUS, ORIG_EYE_VERT_RATIO = (FACE_Y - FACE_EYE_Y) / FACE_RADIUS, EYE_TO_FACE_RADIUS_RATIO = FACE_EYE_RADIUS / FACE_RADIUS;
+    //  
     private static boolean captionSizeTooLarge(Text captionToCheck, Scene sceneToCheck, Circle faceToCheck){
         return captionToCheck.getLayoutBounds().getWidth() > sceneToCheck.getWidth() || captionToCheck.getLayoutBounds().getHeight() > sceneToCheck.getHeight() - faceToCheck.getLayoutBounds().getHeight();
     }
@@ -63,10 +63,24 @@ public class ResponsiveSmileyFace extends Application {
             //'mouth' width and height
             //'caption' positionx, positiony, font size
             Text captionWithNewFont = new Text(FACE_RADIUS, FACE_RADIUS + FACE_Y + 35, "Smiley Face");
-            
-            double newFaceRadius = stage.getWidth() > stage.getHeight() ? stage.getHeight() * (FACE_RADIUS / SCENE_HEIGHT): stage.getWidth() * (FACE_RADIUS / SCENE_WIDTH); 
+            double newFaceRadius = stage.getWidth() > stage.getHeight() ? stage.getHeight() * ORIG_FACE_HRATIO : stage.getWidth() * ORIG_FACE_WRATIO; 
+            /** Line above is equivalent to:
+             * 
+             * double newFaceRadius;
+             * if(stage.getWidth() > stage.getHeight()) {
+             *  newFaceRadius = stage.getHeight() * FACE_;
+             * } else {
+             *  stage.getWidth() * FACE_
+             * }
+            */
             double newFaceX = stage.getWidth()/2;
             double newFaceY = stage.getHeight()/2;
+            leftEye.setCenterX(newFaceX - newFaceRadius * ORIG_EYE_HORIZ_RATIO);
+            leftEye.setCenterY(newFaceY - newFaceRadius * ORIG_EYE_VERT_RATIO);
+            leftEye.setRadius(EYE_TO_FACE_RADIUS_RATIO * newFaceRadius);
+            rightEye.setCenterY(newFaceY - newFaceRadius * ORIG_EYE_VERT_RATIO);
+            rightEye.setCenterX(newFaceX + ORIG_EYE_HORIZ_RATIO * newFaceRadius);
+            rightEye.setRadius(EYE_TO_FACE_RADIUS_RATIO * newFaceRadius);
             face.setRadius(newFaceRadius);
             face.setCenterX(newFaceX);
             face.setCenterY(newFaceY);
@@ -105,9 +119,15 @@ public class ResponsiveSmileyFace extends Application {
             //'caption' positionx, positiony, font size
             
             Text captionWithNewFont = new Text(FACE_RADIUS, FACE_RADIUS + FACE_Y + 35, "Smiley Face");
-            double newFaceRadius = stage.getWidth() > stage.getHeight() ? stage.getHeight() * (FACE_RADIUS / SCENE_HEIGHT): stage.getWidth() * (FACE_RADIUS / SCENE_WIDTH);
+            double newFaceRadius = stage.getWidth() > stage.getHeight() ? stage.getHeight() * ORIG_FACE_HRATIO : stage.getWidth() * ORIG_FACE_WRATIO;
             double newFaceX = stage.getWidth()/2;
             double newFaceY = stage.getHeight()/2;
+            leftEye.setCenterX(newFaceX - newFaceRadius * ORIG_EYE_HORIZ_RATIO);
+            leftEye.setCenterY(newFaceY - newFaceRadius * ORIG_EYE_VERT_RATIO);
+            leftEye.setRadius(EYE_TO_FACE_RADIUS_RATIO * newFaceRadius);
+            rightEye.setCenterY(newFaceY - newFaceRadius * ORIG_EYE_VERT_RATIO);
+            rightEye.setCenterX(newFaceX + ORIG_EYE_HORIZ_RATIO * newFaceRadius);
+            rightEye.setRadius(EYE_TO_FACE_RADIUS_RATIO * newFaceRadius);
             face.setRadius(newFaceRadius);
             face.setCenterX(newFaceX);
             face.setCenterY(newFaceY);
