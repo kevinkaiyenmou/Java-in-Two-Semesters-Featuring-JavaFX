@@ -1,26 +1,18 @@
 {
-    "project": {
-        "referencedLibraries": {
-            "include": [
-                "lib/**/*.jar",
-                "/Users/kevinmou/Downloads/javafx-sdk-16/lib/*"
-            ],
-            "exclude": [
-                "lib/sources/**"
-            ],
-            "sources": {
-                "lib/sources/.jar": "/Users/kevinmou/Downloads/javafx-sdk-16/lib/javafx-controls-16-ea+4-sources.jar"
-            }
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-14",
+            "path": "/Library/Java/JavaVirtualMachines/adoptopenjdk-14.jdk/Contents/Home",
+            "sources": "/Library/Java/JavaVirtualMachines/adoptopenjdk-14.jdk/Contents/Home/lib/src.zip",
+            "javadoc": "https://api.adoptopenjdk.net/",
+            "default": false
         },
-        "importOnFirstTimeStartup": "automatic",
-        "importHint": true,
-        "resourceFilters": [
-            "node_modules",
-            ".git"
-        ],
-        "exportJar": {
-            "targetPath": "${workspaceFolder}/${workspaceFolderBasename}.jar"
-
+        {
+            "name": "JavaSE-15",
+            "path": "/Library/Java/JavaVirtualMachines/liberica-jdk-15-full.jdk/Contents/Home",
+            "sources": "/Library/Java/JavaVirtualMachines/liberica-jdk-15-full.jdk/Contents/Home/lib/src.zip",
+            "javadoc": "https://docs.oracle.com/en/java/javase/15/docs/api/",
+            "default": true
         }
-    },
+    ],
 }
