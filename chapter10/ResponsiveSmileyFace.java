@@ -19,8 +19,9 @@ public class ResponsiveSmileyFace extends Application {
     SCENE_HEIGHT = 2f * FACE_Y + 25f, SCENE_WIDTH = 2 * FACE_X, FONT_HEIGHT = 15f, CAPTION_X = FACE_RADIUS,
     CAPTION_Y = FACE_RADIUS + FACE_Y + 35f, ORIG_FACE_HRATIO = (FACE_RADIUS / SCENE_HEIGHT), ORIG_FACE_WRATIO = (FACE_RADIUS / SCENE_WIDTH), 
     ORIG_EYE_HORIZ_RATIO = (FACE_X - FACE_EYE_LEFT_X) / FACE_RADIUS, ORIG_EYE_VERT_RATIO = (FACE_Y - FACE_EYE_Y) / FACE_RADIUS, 
-    EYE_TO_FACE_RADIUS_RATIO = FACE_EYE_RADIUS / FACE_RADIUS,
-    FONT_TO_FACE_RATIO = FONT_HEIGHT / FACE_RADIUS;
+    EYE_TO_FACE_RADIUS_RATIO = FACE_EYE_RADIUS / FACE_RADIUS, MOUTH_TO_FACE_RADIUS_X_RATIO = radiusX / FACE_RADIUS, 
+    MOUTH_TO_FACE_RADIUS_Y_RATIO = radiusY / FACE_RADIUS, FONT_TO_FACE_RATIO = FONT_HEIGHT / FACE_RADIUS;
+    //what is MOUTH_WIDTH? why is it 25. Is it the width of the circle that the arc makes?
 
 /*     private static boolean captionSizeTooLarge(Text captionToCheck, Scene sceneToCheck, Circle faceToCheck){
         return captionToCheck.getLayoutBounds().getWidth() > sceneToCheck.getWidth() || captionToCheck.getLayoutBounds().getHeight() > sceneToCheck.getHeight() - faceToCheck.getLayoutBounds().getHeight();
@@ -93,6 +94,11 @@ public class ResponsiveSmileyFace extends Application {
             rightEye.setCenterY(newFaceY - newFaceRadius * ORIG_EYE_VERT_RATIO);
             rightEye.setCenterX(newFaceX + ORIG_EYE_HORIZ_RATIO * newFaceRadius);
             rightEye.setRadius(EYE_TO_FACE_RADIUS_RATIO * newFaceRadius);
+            
+            
+            mouth.setRadiusX(MOUTH_TO_FACE_RADIUS_X_RATIO * newFaceRadius); 
+            mouth.setRadiusY(MOUTH_TO_FACE_RADIUS_Y_RATIO * newFaceRadius); 
+
             
             face.setRadius(newFaceRadius);
             face.setCenterX(newFaceX);
