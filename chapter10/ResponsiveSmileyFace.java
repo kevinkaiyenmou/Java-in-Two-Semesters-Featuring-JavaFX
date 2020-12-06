@@ -15,17 +15,14 @@ import javafx.stage.Stage;
 
 public class ResponsiveSmileyFace extends Application {
     final static double FACE_X = 125f, FACE_Y = 125f, FACE_RADIUS = 80f, FACE_EYE_LEFT_X = 86f, FACE_EYE_Y = 100f, FACE_EYE_RADIUS = 10f,
-    FACE_EYE_RIGHT_X = FACE_X + (FACE_X - FACE_EYE_LEFT_X), MOUTH_WIDTH = 25f, SMILE_RADIUS_X = 45f, SMILE_RADIUS_Y = 35f,
+    FACE_EYE_RIGHT_X = FACE_X + (FACE_X - FACE_EYE_LEFT_X), SMILE_RADIUS_X = 45f, SMILE_RADIUS_Y = 35f,
     SCENE_HEIGHT = 2f * FACE_Y + 25f, SCENE_WIDTH = 2 * FACE_X, FONT_HEIGHT = 15f, CAPTION_X = FACE_RADIUS,
     CAPTION_Y = FACE_RADIUS + FACE_Y + 35f, ORIG_FACE_HRATIO = (FACE_RADIUS / SCENE_HEIGHT), ORIG_FACE_WRATIO = (FACE_RADIUS / SCENE_WIDTH), 
     ORIG_EYE_HORIZ_RATIO = (FACE_X - FACE_EYE_LEFT_X) / FACE_RADIUS, ORIG_EYE_VERT_RATIO = (FACE_Y - FACE_EYE_Y) / FACE_RADIUS, 
     EYE_TO_FACE_RADIUS_RATIO = FACE_EYE_RADIUS / FACE_RADIUS, MOUTH_TO_FACE_RADIUS_X_RATIO = SMILE_RADIUS_X / FACE_RADIUS, 
     MOUTH_TO_FACE_RADIUS_Y_RATIO = SMILE_RADIUS_Y / FACE_RADIUS, FONT_TO_FACE_RATIO = FONT_HEIGHT / FACE_RADIUS;
-    //what is MOUTH_WIDTH? why is it 25. Is it the width of the circle that the arc makes?
 
-/*     private static boolean captionSizeTooLarge(Text captionToCheck, Scene sceneToCheck, Circle faceToCheck){
-        return captionToCheck.getLayoutBounds().getWidth() > sceneToCheck.getWidth() || captionToCheck.getLayoutBounds().getHeight() > sceneToCheck.getHeight() - faceToCheck.getLayoutBounds().getHeight();
-    } */
+
     public void start(Stage stage) {
 
         // create and configure the main circle for the face
@@ -69,12 +66,6 @@ public class ResponsiveSmileyFace extends Application {
         // https://stackoverflow.com/a/38216917/1757756
         ChangeListener<Number> stageListener = (observable, oldValue, newValue) -> {
             System.out.println("Stage height: " + stage.getHeight() + " Stage width: " + stage.getWidth());
-            //'face' width and height
-            //'rightEye' width and height
-            //'leftEye' width and height
-            //'mouth' width and height
-            //'caption' positionx, positiony, font size
-            // Text captionWithNewFont = new Text(FACE_RADIUS, FACE_RADIUS + FACE_Y + 35, "Smiley Face");
             double newFaceRadius = stage.getWidth() > stage.getHeight() ? stage.getHeight() * ORIG_FACE_HRATIO : stage.getWidth() * ORIG_FACE_WRATIO; 
             /** Line above is equivalent to:
              * 
@@ -105,30 +96,10 @@ public class ResponsiveSmileyFace extends Application {
             face.setCenterY(newFaceY);
 
             double fontSize = FONT_TO_FACE_RATIO * newFaceRadius;
-/* 
-            for(int newAttemptValue = newValue.intValue();(newAttemptValue > 0) && (captionSizeTooLarge(captionWithNewFont,scene,face));newAttemptValue--){
-                //test shrinking values for font size to see if they fit  
-                newAttemptValue--;
-                fontSize = caption.getFont().getSize() * (double)newAttemptValue/(double)oldValue.intValue();
-                captionWithNewFont.setFont(Font.font("Verdana",fontSize));
-            }
-            captionWithNewFont = null;
-            if(fontSize == 0){
-                fontSize = 1;
-            } */
             caption.setFont(Font.font("Verdana",fontSize));
-    
-            
-            // suppose program state 1 is (Width is OK, Height is OK), then we want
-            // to find value of Font size such that caption.getLayoutBounds().getWidth() will grow/shrink by same percentage as newValue.intValue()/oldValue.intValue()
-            //loop start by guessing newFontSize = oldFontSize * newValue.intValue()/oldValue.intValue()
-            // fontSizeChangeRatio = captionWithNewFont.getLayoutBounds().getWidth() / captionWithOldFont.getLayoutBounds().getWidth()
-            
-            // suppose program state 2 is (Width is NOK, Height is OK), then width shrunk and we want
-            //to find value of Font size such that caption.getLayoutBounds().getWidth() fits
+
 
             System.out.println("Caption height: " + caption.getLayoutBounds().getHeight() + " Caption width: " + caption.getLayoutBounds().getWidth() + " Caption font: " + caption.getFont());
-            // not needed: 'scene' width and height
         };
         
         // add the scene to the stage, then set the title
