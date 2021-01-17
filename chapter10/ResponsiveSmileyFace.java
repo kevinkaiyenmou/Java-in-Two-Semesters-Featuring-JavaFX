@@ -1,8 +1,11 @@
+//import java.beans.EventHandler;
+
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
@@ -12,6 +15,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+//import javafx.event.ActionEvent;
 
 public class ResponsiveSmileyFace extends Application {
     final static double FACE_X = 125f, FACE_Y = 125f, FACE_RADIUS = 80f, FACE_EYE_LEFT_X = 86f, FACE_EYE_Y = 100f, FACE_EYE_RADIUS = 10f,
@@ -52,13 +56,15 @@ public class ResponsiveSmileyFace extends Application {
         caption.setFont(Font.font("Verdana", FONT_HEIGHT));
         caption.setTextAlignment(TextAlignment.CENTER);
 
+        Button frownButton = new Button("Change my mood");
         // create a group that holds all the features
         Group mainGroup = new Group(face, rightEye, leftEye, mouth);
 
         StackPane faceCaption = new StackPane();
-        faceCaption.getChildren().addAll(mainGroup, caption);
+        faceCaption.getChildren().addAll(mainGroup, caption, frownButton);
         StackPane.setAlignment(mainGroup,Pos.CENTER);
         StackPane.setAlignment(caption, Pos.BOTTOM_CENTER);
+        StackPane.setAlignment(frownButton, Pos.TOP_CENTER);
         // create and configure a new scene
         Scene scene = new Scene(faceCaption, SCENE_WIDTH, SCENE_HEIGHT, Color.YELLOW);
         
@@ -68,7 +74,7 @@ public class ResponsiveSmileyFace extends Application {
             System.out.println("Stage height: " + stage.getHeight() + " Stage width: " + stage.getWidth());
             double newFaceRadius = stage.getWidth() > stage.getHeight() ? stage.getHeight() * ORIG_FACE_HRATIO : stage.getWidth() * ORIG_FACE_WRATIO; 
             /** Line above is equivalent to:
-             * 
+            s * 
              * double newFaceRadius;
              * if(stage.getWidth() > stage.getHeight()) {
              *  newFaceRadius = stage.getHeight() * FACE_;
@@ -101,7 +107,8 @@ public class ResponsiveSmileyFace extends Application {
 
             System.out.println("Caption height: " + caption.getLayoutBounds().getHeight() + " Caption width: " + caption.getLayoutBounds().getWidth() + " Caption font: " + caption.getFont());
         };
-        
+        frownButton.setOnAction(e -> {mouth.setLength(-mouth.getLength());});
+
         // add the scene to the stage, then set the title
         stage.setScene(scene);
         stage.setTitle("Smiley Face");

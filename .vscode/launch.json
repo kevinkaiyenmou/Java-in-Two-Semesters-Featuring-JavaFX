@@ -1,0 +1,78 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch JavaFX Class",
+            "request": "launch",
+            "vmArgs": "--module-path \"/Users/kevinmou/Downloads/javafx-sdk-16/lib\"  --add-modules javafx.controls,javafx.fxml",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "projectName": "Java-in-Two-Semesters-Featuring-JavaFX_850819f1"
+        },
+        {
+            "type": "java",
+            "name": "Launch ChangingFace",
+            "request": "launch",
+            "mainClass": "ChangingFace",
+            "projectName": "Java-in-Two-Semesters-Featuring-JavaFX_850819f1"
+        },
+        {
+            "type": "java",
+            "name": "Launch MetricConverter",
+            "request": "launch",
+            "mainClass": "MetricConverter",
+            "projectName": "Java-in-Two-Semesters-Featuring-JavaFX_850819f1"
+        },
+        {
+            "type": "java",
+            "name": "Launch NumberFormatExample",
+            "request": "launch",
+            "mainClass": "NumberFormatExample",
+            "projectName": "Java-in-Two-Semesters-Featuring-JavaFX_850819f1"
+        },
+        {
+            "type": "java",
+            "name": "Launch OblongGUI",
+            "request": "launch",
+            "mainClass": "OblongGUI",
+            "projectName": "Java-in-Two-Semesters-Featuring-JavaFX_850819f1"
+        },
+        {
+            "type": "java",
+            "name": "Launch PushMe",
+            "request": "launch",
+            "mainClass": "PushMe",
+            "projectName": "Java-in-Two-Semesters-Featuring-JavaFX_850819f1"
+        },
+        {
+            "type": "java",
+            "name": "Launch ResponsiveSmileyFace",
+            "request": "launch",
+            "mainClass": "ResponsiveSmileyFace",
+            "projectName": "Java-in-Two-Semesters-Featuring-JavaFX_850819f1"
+        },
+        {
+            "type": "java",
+            "name": "Launch SmileyFace",
+            "request": "launch",
+            "mainClass": "SmileyFace",
+            "projectName": "Java-in-Two-Semesters-Featuring-JavaFX_850819f1"
+        },
+        {
+            "type": "java",
+            "name": "Launch Triangle",
+            "request": "launch",
+            "mainClass": "Triangle",
+            "projectName": "Java-in-Two-Semesters-Featuring-JavaFX_850819f1"
+        }
+    ]
+}
