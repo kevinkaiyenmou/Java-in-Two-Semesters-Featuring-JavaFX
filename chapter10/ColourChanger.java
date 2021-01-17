@@ -15,16 +15,14 @@ import javafx.event.EventHandler;
 public class ColourChanger extends Application {
     static int clicked = 0;
     public void start(Stage stage) {
-        Group root = new Group();
-        final Scene scene = new Scene(root, 500, 500, Color.WHITE);
+        final HBox buttonBox = new HBox(30);
+        final Scene scene = new Scene(buttonBox, 500, 500, Color.WHITE);
         
-        final Button BLUEBUTTON = new Button("Blue background");
-        final Button REDBUTTON = new Button("Red background");
+        final Button blueButton = new Button("Blue background");
+        final Button redButton = new Button("Red background");
         
-        HBox buttonBox = new HBox();
         buttonBox.setAlignment(Pos.CENTER);
-        buttonBox.getChildren().addAll(BLUEBUTTON, REDBUTTON);
-        root.getChildren().add(buttonBox);
+        buttonBox.getChildren().addAll(blueButton, redButton);
         stage.setScene(scene);
         stage.setTitle("Colour Changer");
         stage.show();
@@ -32,9 +30,10 @@ public class ColourChanger extends Application {
         // define the method that will handle the button click for BLUEBUTTON here
         EventHandler<ActionEvent> bluePressed = (event) -> {
             System.out.println("Blue button pressed " + (++clicked) +" times.");
+            System.out.println("'buttonBox' had an alignment of "+ buttonBox.getAlignment());
             scene.setFill(Color.BLUE);
         };
-        BLUEBUTTON.addEventHandler(ActionEvent.ANY, bluePressed);
+        blueButton.addEventHandler(ActionEvent.ANY, bluePressed);
     }
 
     public static void main(String[] args) {
