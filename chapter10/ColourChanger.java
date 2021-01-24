@@ -3,6 +3,10 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -31,9 +35,14 @@ public class ColourChanger extends Application {
         EventHandler<ActionEvent> bluePressed = (event) -> {
             System.out.println("Blue button pressed " + (++clicked) +" times.");
             System.out.println("'buttonBox' had an alignment of "+ buttonBox.getAlignment());
-            scene.setFill(Color.BLUE);
+            buttonBox.setBackground(new Background(new BackgroundFill(Color.BLUE, new CornerRadii(0), new Insets(0))));
+        };
+
+        EventHandler<ActionEvent> redPressed = (event) -> {
+            buttonBox.setBackground(new Background(new BackgroundFill(Color.RED, new CornerRadii(0), new Insets(0))));
         };
         blueButton.addEventHandler(ActionEvent.ANY, bluePressed);
+        redButton.addEventHandler(ActionEvent.ANY, redPressed);
     }
 
     public static void main(String[] args) {
